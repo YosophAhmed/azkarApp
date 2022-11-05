@@ -30,18 +30,21 @@ class _ZekrItemState extends State<ZekrItem> {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
+          padding: EdgeInsets.fromLTRB(1.w,1.h,1.w,0),
           height: 50.h,
           width: double.infinity,
           child: SingleChildScrollView(
-            child: Text(
-              widget.zekr.content,
-              style: TextStyle(
-                fontSize: 22.sp,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'IBMPlexSansArabic',
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+              child: Text(
+                widget.zekr.content,
+                style: TextStyle(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'IBMPlexSansArabic',
+                ),
+                textAlign: TextAlign.right,
               ),
-              textAlign: TextAlign.right,
             ),
           ),
         ),
@@ -58,7 +61,7 @@ class _ZekrItemState extends State<ZekrItem> {
           },
           child: Container(
             alignment: Alignment.center,
-            height: 30.h,
+            height: 22.h,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
