@@ -1,4 +1,6 @@
 import 'package:azkar/pages/home_page.dart';
+import 'package:azkar/pages/morning_page.dart';
+import 'package:azkar/pages/night_page.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -13,9 +15,17 @@ class AzkarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType){
-        return const MaterialApp(
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HomePage(),
+          theme: ThemeData(
+            fontFamily: 'IBMPlexSansArabic',
+          ),
+          initialRoute: HomePage.routeName,
+          routes: {
+            HomePage.routeName: (context) => const HomePage(),
+            MorningPage.routeName: (context) => const MorningPage(),
+            NightPage.routeName: (context) => const NightPage(),
+          },
         );
       }
     );
