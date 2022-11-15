@@ -1,4 +1,5 @@
 import 'package:azkar/models/zekr.dart';
+import 'package:azkar/pages/widgets/bottom_zekr_item.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,7 +32,7 @@ class _ZekrItemState extends State<ZekrItem> {
       children: [
         Container(
           padding: EdgeInsets.fromLTRB(1.w,1.h,1.w,0),
-          height: 50.h,
+          height: 60.h,
           width: double.infinity,
           child: SingleChildScrollView(
             child: Padding(
@@ -39,9 +40,8 @@ class _ZekrItemState extends State<ZekrItem> {
               child: Text(
                 widget.zekr.content,
                 style: TextStyle(
-                  fontSize: 22.sp,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'IBMPlexSansArabic',
                 ),
                 textAlign: TextAlign.right,
               ),
@@ -61,7 +61,7 @@ class _ZekrItemState extends State<ZekrItem> {
           },
           child: Container(
             alignment: Alignment.center,
-            height: 22.h,
+            height: 16.h,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -78,40 +78,19 @@ class _ZekrItemState extends State<ZekrItem> {
             child: Text(
               '$counter',
               style: TextStyle(
-                fontSize: 120.sp,
+                fontSize: 80.sp,
               ),
             ),
           ),
         ),
-        Container(
+        BottomZekrItem(
           color: widget.containerColor4,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 2.w),
-                child: Text(
-                  widget.zekr.zekrNumber,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontFamily: 'IBMPlexSansArabic',
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 2.w),
-                child: Text(
-                  widget.zekr.zekrCounter,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontFamily: 'IBMPlexSansArabic',
-                  ),
-                ),
-              ),
-            ],
-          ),
+          zekrNumber: widget.zekr.zekrNumber,
+          zekrCounter: widget.zekr.zekrCounter,
         ),
       ],
     );
   }
 }
+
+

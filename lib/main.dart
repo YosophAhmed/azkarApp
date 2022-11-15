@@ -18,6 +18,7 @@ class AzkarApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
+            primarySwatch: Colors.blueGrey,
             fontFamily: 'IBMPlexSansArabic',
           ),
           initialRoute: HomePage.routeName,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomeCardModel {
+  final void Function() onTap;
+
   final Color color1;
   final Color color2;
   final Color color3;
@@ -13,6 +15,7 @@ class HomeCardModel {
 
   const HomeCardModel({
     Key? key,
+    required this.onTap,
     required this.color1,
     required this.color2,
     required this.color3,

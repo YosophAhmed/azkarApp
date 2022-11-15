@@ -3,20 +3,17 @@ import 'package:sizer/sizer.dart';
 import 'package:azkar/models/home_card_model.dart';
 
 class HomeCard extends StatelessWidget {
-
   final HomeCardModel homeCardModel;
-  final Function() onTap;
 
   const HomeCard({
     Key? key,
     required this.homeCardModel,
-    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: homeCardModel.onTap,
       child: Container(
         height: 40.h,
         width: double.infinity,
