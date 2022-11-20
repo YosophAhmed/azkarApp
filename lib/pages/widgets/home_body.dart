@@ -44,6 +44,7 @@ class HomeBody extends StatelessWidget {
         title: 'أذكار المساء',
       ),
     ];
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
       child: Column(
