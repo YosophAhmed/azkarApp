@@ -51,6 +51,7 @@ class ZekrItem extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 BlocProvider.of<ZekrCubit>(context).zekrIncrement(
+                  contentCounter: zekr.contentCounter,
                 );
               },
               child: Container(

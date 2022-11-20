@@ -1,8 +1,11 @@
 import 'package:azkar/components/zekr_item.dart';
 import 'package:azkar/constants/colors.dart';
+import 'package:azkar/cubit/zekr_cubit.dart';
+import 'package:azkar/cubit/zekr_states.dart';
 import 'package:azkar/models/zekr.dart';
 import 'package:azkar/pages/widgets/custom_buttom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 class MorningPage extends StatelessWidget {
@@ -218,19 +221,27 @@ class MorningPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: PageView.builder(
-              itemBuilder: (context, index) => ZekrItem(
-                zekr: morningAzkar[index],
-                containerColor1: morningColor1,
-                containerColor2: morningColor2,
-                containerColor3: morningColor3,
-                containerColor4: morningColor4,
-              ),
-              itemCount: morningAzkar.length,
-              reverse: true,
+          BlocConsumer<ZekrCubit, ZekrState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              return Expanded(
+                child: PageView.builder(
+                  itemBuilder: (context, index) => ZekrItem(
+                    zekr: morningAzkar[index],
+                    containerColor1: morningColor1,
+                    containerColor2: morningColor2,
+                    containerColor3: morningColor3,
+                    containerColor4: morningColor4,
+                  ),
+                  itemCount: morningAzkar.length,
+                  reverse: true,
+                  controller: BlocProvider.of<ZekrCubit>(context).controller,
+                  onPageChanged: (index){
 
-            ),
+                  },
+                ),
+              );
+            },
           ),
           const CustomBottomBar(color: morningColor4),
         ],
