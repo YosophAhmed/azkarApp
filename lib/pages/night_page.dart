@@ -1,8 +1,11 @@
 import 'package:azkar/components/zekr_item.dart';
 import 'package:azkar/constants/colors.dart';
+import 'package:azkar/cubit/zekr_cubit.dart';
+import 'package:azkar/cubit/zekr_states.dart';
 import 'package:azkar/models/zekr.dart';
 import 'package:azkar/pages/widgets/custom_buttom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 class NightPage extends StatelessWidget {
@@ -213,18 +216,27 @@ class NightPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: PageView.builder(
-              itemBuilder: (context, index) => ZekrItem(
-                zekr: nightAzkar[index],
-                containerColor1: nightColor1,
-                containerColor2: nightColor2,
-                containerColor3: nightColor3,
-                containerColor4: nightColor4,
-              ),
-              itemCount: nightAzkar.length,
-              reverse: true,
-            ),
+          BlocConsumer<ZekrCubit, ZekrState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              return Expanded(
+                child: PageView.builder(
+                  itemBuilder: (context, index) => ZekrItem(
+                    zekr: nightAzkar[index],
+                    containerColor1: nightColor1,
+                    containerColor2: nightColor2,
+                    containerColor3: nightColor3,
+                    containerColor4: nightColor4,
+                  ),
+                  itemCount: nightAzkar.length,
+                  reverse: true,
+                  controller: BlocProvider.of<ZekrCubit>(context).controller,
+                  onPageChanged: (index) {
+                    BlocProvider.of<ZekrCubit>(context).swipe();
+                  },
+                ),
+              );
+            },
           ),
           const CustomBottomBar(color: nightColor4),
         ],
