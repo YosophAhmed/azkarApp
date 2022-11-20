@@ -1,7 +1,9 @@
 import 'package:azkar/models/zekr.dart';
 import 'package:azkar/pages/widgets/bottom_zekr_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+
 
 class ZekrItem extends StatefulWidget {
   final Zekr zekr;
@@ -28,67 +30,71 @@ class _ZekrItemState extends State<ZekrItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.fromLTRB(1.w,1.h,1.w,0),
-          height: 60.h,
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-              child: Text(
-                widget.zekr.content,
-                style: TextStyle(
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.bold,
+    return BlocBuilder(
+      builder: (context, state) {
+        return Column(
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(1.w,1.h,1.w,0),
+              height: 60.h,
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                  child: Text(
+                    widget.zekr.content,
+                    style: TextStyle(
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
                 ),
-                textAlign: TextAlign.right,
               ),
             ),
-          ),
-        ),
-        const Spacer(),
-        GestureDetector(
-          onTap: () {
-            if (counter == widget.zekr.contentCounter) {
-              return;
-            } else {
-              setState(() {
-                counter++;
-              });
-            }
-          },
-          child: Container(
-            alignment: Alignment.center,
-            height: 16.h,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  widget.containerColor1,
-                  widget.containerColor2,
-                  widget.containerColor3,
-                  widget.containerColor4,
-                ],
+            const Spacer(),
+            GestureDetector(
+              onTap: () {
+                if (counter == widget.zekr.contentCounter) {
+                  return;
+                } else {
+                  setState(() {
+                    counter++;
+                  });
+                }
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: 16.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      widget.containerColor1,
+                      widget.containerColor2,
+                      widget.containerColor3,
+                      widget.containerColor4,
+                    ],
+                  ),
+                ),
+                child: Text(
+                  '$counter',
+                  style: TextStyle(
+                    fontSize: 80.sp,
+                  ),
+                ),
               ),
             ),
-            child: Text(
-              '$counter',
-              style: TextStyle(
-                fontSize: 80.sp,
-              ),
+            BottomZekrItem(
+              color: widget.containerColor4,
+              zekrNumber: widget.zekr.zekrNumber,
+              zekrCounter: widget.zekr.zekrCounter,
             ),
-          ),
-        ),
-        BottomZekrItem(
-          color: widget.containerColor4,
-          zekrNumber: widget.zekr.zekrNumber,
-          zekrCounter: widget.zekr.zekrCounter,
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }
