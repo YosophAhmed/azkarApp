@@ -8,10 +8,8 @@ class ZekrCubit extends Cubit<ZekrState> {
   int counter = 0;
   var controller = PageController();
 
-
-
   void zekrIncrement({required int contentCounter}) {
-    if (counter == contentCounter) {
+    if (counter == contentCounter - 1) {
       controller.nextPage(
         duration: const Duration(
           milliseconds: 100,
@@ -30,5 +28,8 @@ class ZekrCubit extends Cubit<ZekrState> {
     }
   }
 
-
+  void swipe() {
+    counter = 0;
+    emit(ZekrSwipeState());
+  }
 }
