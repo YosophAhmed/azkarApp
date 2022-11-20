@@ -1,18 +1,19 @@
+import 'package:azkar/cubit/zekr_cubit.dart';
+import 'package:azkar/cubit/zekr_states.dart';
 import 'package:azkar/models/zekr.dart';
 import 'package:azkar/pages/widgets/bottom_zekr_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-
-class ZekrItem extends StatefulWidget {
+class ZekrItem extends StatelessWidget {
   final Zekr zekr;
   final Color containerColor1;
   final Color containerColor2;
   final Color containerColor3;
   final Color containerColor4;
 
-  const ZekrItem({
+  ZekrItem({
     Key? key,
     required this.zekr,
     required this.containerColor1,
@@ -22,27 +23,21 @@ class ZekrItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ZekrItem> createState() => _ZekrItemState();
-}
-
-class _ZekrItemState extends State<ZekrItem> {
-  var counter = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
+    return BlocConsumer<ZekrCubit, ZekrState>(
+      listener: (context, state) {},
       builder: (context, state) {
         return Column(
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(1.w,1.h,1.w,0),
+              padding: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 0),
               height: 60.h,
               width: double.infinity,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                   child: Text(
-                    widget.zekr.content,
+                    zekr.content,
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
@@ -55,13 +50,8 @@ class _ZekrItemState extends State<ZekrItem> {
             const Spacer(),
             GestureDetector(
               onTap: () {
-                if (counter == widget.zekr.contentCounter) {
-                  return;
-                } else {
-                  setState(() {
-                    counter++;
-                  });
-                }
+                BlocProvider.of<ZekrCubit>(context).zekrIncrement(
+                );
               },
               child: Container(
                 alignment: Alignment.center,
@@ -72,15 +62,15 @@ class _ZekrItemState extends State<ZekrItem> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      widget.containerColor1,
-                      widget.containerColor2,
-                      widget.containerColor3,
-                      widget.containerColor4,
+                      containerColor1,
+                      containerColor2,
+                      containerColor3,
+                      containerColor4,
                     ],
                   ),
                 ),
                 child: Text(
-                  '$counter',
+                  '${BlocProvider.of<ZekrCubit>(context).counter}',
                   style: TextStyle(
                     fontSize: 80.sp,
                   ),
@@ -88,9 +78,9 @@ class _ZekrItemState extends State<ZekrItem> {
               ),
             ),
             BottomZekrItem(
-              color: widget.containerColor4,
-              zekrNumber: widget.zekr.zekrNumber,
-              zekrCounter: widget.zekr.zekrCounter,
+              color: containerColor4,
+              zekrNumber: zekr.zekrNumber,
+              zekrCounter: zekr.zekrCounter,
             ),
           ],
         );
@@ -98,5 +88,3 @@ class _ZekrItemState extends State<ZekrItem> {
     );
   }
 }
-
-

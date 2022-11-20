@@ -229,6 +229,7 @@ class MorningPage extends StatelessWidget {
               ),
               itemCount: morningAzkar.length,
               reverse: true,
+
             ),
           ),
           const CustomBottomBar(color: morningColor4),

@@ -4,9 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ZekrCubit extends Cubit<ZekrState> {
   ZekrCubit() : super(ZekrInitialState());
 
-  var counter = 0;
+  int counter = 0;
 
-  void increment() {
-
+  int zekrIncrement() {
+    counter++;
+    emit(
+      ZekrIncrementState(),
+    );
+    return counter;
   }
+
 }
