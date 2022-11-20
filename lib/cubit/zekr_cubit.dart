@@ -6,6 +6,7 @@ class ZekrCubit extends Cubit<ZekrState> {
   ZekrCubit() : super(ZekrInitialState());
 
   int counter = 0;
+  int listCounter = 0;
   var controller = PageController();
 
   void zekrIncrement({required int contentCounter}) {
@@ -28,8 +29,23 @@ class ZekrCubit extends Cubit<ZekrState> {
     }
   }
 
-  void swipe() {
+  void swipe({
+    required int index,
+    required int lastIndex,
+  }) {
+    listCounter = index;
     counter = 0;
-    emit(ZekrSwipeState());
+    if (index == 0) {
+      emit(
+        ZekrFirstBottomState(),
+      );
+    } else if(listCounter == lastIndex - 1) {
+      emit(ZekrLastBottomState());
+    }
+    else {
+      emit(
+        ZekrSwipeState(),
+      );
+    }
   }
 }

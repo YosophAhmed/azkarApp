@@ -238,7 +238,10 @@ class MorningPage extends StatelessWidget {
                   reverse: true,
                   controller: BlocProvider.of<ZekrCubit>(context).controller,
                   onPageChanged: (index) {
-                    BlocProvider.of<ZekrCubit>(context).swipe();
+                    BlocProvider.of<ZekrCubit>(context).swipe(
+                      index: index,
+                      lastIndex: morningAzkar.length,
+                    );
                   },
                 ),
               );
