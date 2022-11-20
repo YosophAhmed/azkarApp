@@ -9,7 +9,18 @@ class ZekrCubit extends Cubit<ZekrState> {
   int listCounter = 0;
   var controller = PageController();
 
-  void zekrIncrement({required int contentCounter}) {
+  void returnState() {
+    counter = 0;
+    listCounter = 0;
+    controller.initialPage;
+    emit(
+      ZekrReturnState(),
+    );
+  }
+
+  void zekrIncrement({
+    required int contentCounter,
+  }) {
     if (counter == contentCounter - 1) {
       controller.nextPage(
         duration: const Duration(
@@ -17,10 +28,10 @@ class ZekrCubit extends Cubit<ZekrState> {
         ),
         curve: Curves.fastOutSlowIn,
       );
+      counter = 0;
       emit(
         ZekrFinishState(),
       );
-      counter = 0;
     } else {
       counter++;
       emit(
@@ -39,10 +50,9 @@ class ZekrCubit extends Cubit<ZekrState> {
       emit(
         ZekrFirstBottomState(),
       );
-    } else if(listCounter == lastIndex - 1) {
+    } else if (listCounter == lastIndex - 1) {
       emit(ZekrLastBottomState());
-    }
-    else {
+    } else {
       emit(
         ZekrSwipeState(),
       );

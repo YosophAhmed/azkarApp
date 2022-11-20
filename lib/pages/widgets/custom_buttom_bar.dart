@@ -17,7 +17,7 @@ class CustomBottomBar extends StatelessWidget {
     return BlocConsumer<ZekrCubit, ZekrState>(
       listener: (context, state) {},
       builder: (context, state) {
-        if (state is ZekrInitialState) {
+        if (state is ZekrInitialState || state is ZekrReturnState) {
           return Container(
             color: color,
             child: Row(

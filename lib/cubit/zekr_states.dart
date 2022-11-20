@@ -11,3 +11,6 @@ class ZekrIncrementState extends ZekrState{}
 class ZekrSwipeState extends ZekrState{}
 
 class ZekrFinishState extends ZekrState{}
+
+class ZekrReturnState extends ZekrState{}
+

@@ -178,48 +178,49 @@ class NightPage extends StatelessWidget {
       ),
     ];
 
-    return Scaffold(
-      backgroundColor: nightColor1,
-      appBar: AppBar(
-        title: Text(
-          'أذكار المساء',
-          style: TextStyle(
-            fontSize: 32.sp,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'IBMPlexSansArabic',
-            color: Colors.black,
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: nightColor2,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_ios_new,
-            size: 33.sp,
-            color: nightColor4,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 3.w),
-            child: Icon(
-              Icons.mode_night,
-              color: const Color(0xff381C59),
-              size: 33.sp,
+    return BlocConsumer<ZekrCubit, ZekrState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: nightColor1,
+          appBar: AppBar(
+            title: Text(
+              'أذكار المساء',
+              style: TextStyle(
+                fontSize: 32.sp,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'IBMPlexSansArabic',
+                color: Colors.black,
+              ),
             ),
+            centerTitle: true,
+            elevation: 0,
+            backgroundColor: nightColor2,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+                BlocProvider.of<ZekrCubit>(context).returnState();
+              },
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+                size: 33.sp,
+                color: nightColor4,
+              ),
+            ),
+            actions: [
+              Padding(
+                padding: EdgeInsets.only(right: 3.w),
+                child: Icon(
+                  Icons.mode_night,
+                  color: const Color(0xff381C59),
+                  size: 33.sp,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          BlocConsumer<ZekrCubit, ZekrState>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              return Expanded(
+          body: Column(
+            children: [
+              Expanded(
                 child: PageView.builder(
                   itemBuilder: (context, index) => ZekrItem(
                     zekr: nightAzkar[index],
@@ -238,12 +239,12 @@ class NightPage extends StatelessWidget {
                     );
                   },
                 ),
-              );
-            },
+              ),
+              const CustomBottomBar(color: nightColor4),
+            ],
           ),
-          const CustomBottomBar(color: nightColor4),
-        ],
-      ),
+        );
+      },
     );
   }
 }
